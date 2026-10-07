@@ -28,7 +28,6 @@ export const ApiMonitorModal: React.FC<ApiMonitorModalProps> = ({
 
   const [testStopCode, setTestStopCode] = useState('04121');
   const [testServiceNo, setTestServiceNo] = useState('');
-  const [testAccountKey, setTestAccountKey] = useState('');
   const [apiResponse, setApiResponse] = useState<any>(null);
   const [apiStatus, setApiStatus] = useState<number | null>(null);
   const [apiLoading, setApiLoading] = useState(false);
@@ -65,13 +64,8 @@ export const ApiMonitorModal: React.FC<ApiMonitorModalProps> = ({
         params.set('ServiceNo', testServiceNo.trim());
       }
 
-      const headers: Record<string, string> = {};
-      if (testAccountKey.trim()) {
-        headers['AccountKey'] = testAccountKey.trim();
-      }
-
       const url = `/api/bus-arrival?${params.toString()}`;
-      const res = await fetch(url, { headers });
+      const res = await fetch(url);
       setApiStatus(res.status);
       const data = await res.json();
       setApiResponse(data);
@@ -195,7 +189,7 @@ export const ApiMonitorModal: React.FC<ApiMonitorModalProps> = ({
               Calls the live gateway <code className="bg-slate-100 px-1 py-0.5 rounded font-mono">GET /api/bus-arrival?BusStopCode=04121</code> which queries LTA DataMall v3.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-space font-semibold text-[#64748b] uppercase mb-1">
                   BusStopCode (Required)
@@ -218,19 +212,6 @@ export const ApiMonitorModal: React.FC<ApiMonitorModalProps> = ({
                   value={testServiceNo}
                   onChange={(e) => setTestServiceNo(e.target.value)}
                   placeholder="e.g. 7 or leave blank"
-                  className="w-full h-10 px-3 bg-[#f8fafc] border border-[#e2e8f0] rounded text-xs font-mono focus:border-[#6f2c75] outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-space font-semibold text-[#64748b] uppercase mb-1">
-                  Header AccountKey (Optional)
-                </label>
-                <input
-                  type="password"
-                  value={testAccountKey}
-                  onChange={(e) => setTestAccountKey(e.target.value)}
-                  placeholder="Paste test LTA Key"
                   className="w-full h-10 px-3 bg-[#f8fafc] border border-[#e2e8f0] rounded text-xs font-mono focus:border-[#6f2c75] outline-none"
                 />
               </div>
