@@ -1,0 +1,6 @@
+{
+  "name": "Metropolitan Transit Wayfinding",
+  "description": "Civic transit wayfinding system featuring real-time bus arrivals, vehicle occupancy levels, interactive stop and route exploration, line diagrams, and journey planning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
