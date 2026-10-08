@@ -14,6 +14,9 @@ async function startServer() {
   const PORT = Number(process.env.PORT) || 3000;
   const isProduction = process.env.NODE_ENV === 'production';
 
+  // Plushie designs carry a base64 image (up to 5 MB raw), so they need a
+  // larger body limit than the rest of the API.
+  app.use('/api/plushies', express.json({ limit: '8mb' }));
   app.use(express.json());
 
   // Mount API endpoints under /api

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bus, MapPin, GitCommit, Calculator, Bookmark } from 'lucide-react';
+import { Bus, MapPin, GitCommit, Calculator, Bookmark, Heart } from 'lucide-react';
 
 interface MobileBottomNavProps {
   activeTab: string;
@@ -16,11 +16,12 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
     { id: 'routes', label: 'Routes', icon: GitCommit },
     { id: 'planner', label: 'Planner', icon: Bookmark },
     { id: 'fare', label: 'Fare', icon: Calculator },
+    { id: 'plushie', label: 'Plushie', icon: Heart },
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e2e8f0] px-2 py-1 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-      <div className="grid grid-cols-5 items-center h-14">
+    <nav className="xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e2e8f0] px-2 py-1 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+      <div className="grid grid-cols-6 items-center h-14">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;

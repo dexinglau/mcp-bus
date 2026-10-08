@@ -30,6 +30,7 @@ import { StopsDirectory } from './components/StopsDirectory';
 import { ServiceAlertsModal } from './components/ServiceAlertsModal';
 import { ApiMonitorModal } from './components/ApiMonitorModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
+import { PlushieStudio } from './components/plushie/PlushieStudio';
 import {
   BUS_STOPS_DATABASE,
   BUS_ARRIVALS_MOCK,
@@ -41,7 +42,7 @@ import {
 } from './data/transitData';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'arrivals' | 'stops' | 'routes' | 'planner' | 'fare' | 'alerts'>('arrivals');
+  const [activeTab, setActiveTab] = useState<'arrivals' | 'stops' | 'routes' | 'planner' | 'fare' | 'plushie' | 'alerts'>('arrivals');
   const [searchMode, setSearchMode] = useState<'service' | 'stop'>('service');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentStop, setCurrentStop] = useState<BusStop>(BUS_STOPS_DATABASE[0]);
@@ -250,7 +251,7 @@ export default function App() {
   }, [searchMode, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-[#f4f6f8] text-[#111c2d] flex flex-col font-work pb-16 md:pb-0">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#111c2d] flex flex-col font-work pb-16 xl:pb-0">
       {/* Top Bar Contract (3 zones) */}
       <Header
         activeTab={activeTab}
@@ -500,6 +501,9 @@ export default function App() {
 
         {/* Fare Calculator View */}
         {activeTab === 'fare' && <FareCalculator />}
+
+        {/* Plushie Studio View */}
+        {activeTab === 'plushie' && <PlushieStudio />}
       </main>
 
       {/* Service Advisories Modal */}

@@ -1,12 +1,14 @@
 import express from 'express';
 import healthRouter from './health.js';
 import busArrivalRouter from './bus-arrival.js';
+import plushiesRouter from './plushies.js';
 
 const apiRouter = express.Router();
 
 apiRouter.use('/health', healthRouter);
 apiRouter.use('/bus-arrival', busArrivalRouter);
 apiRouter.use('/BusArrival', busArrivalRouter);
+apiRouter.use('/plushies', plushiesRouter);
 
 // Root index for /api
 apiRouter.get('/', (req, res) => {
@@ -16,6 +18,7 @@ apiRouter.get('/', (req, res) => {
     endpoints: {
       health: '/api/health',
       busArrival: '/api/bus-arrival?BusStopCode=04121[&ServiceNo=7]',
+      plushies: 'POST /api/plushies, POST /api/plushies/quote, GET /api/plushies/:id[/artwork]',
     },
     documentation: {
       busStopCode: '5-digit bus stop identifier (e.g. 04121 for City Hall Stn Exit B, 09048 for Orchard Stn)',
