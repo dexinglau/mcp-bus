@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setActiveTab('arrivals')}
             className="text-left group cursor-pointer focus:outline-none"
           >
-            <span className="font-space font-bold text-xl 2xl:text-2xl whitespace-nowrap tracking-tight text-[#0f172a] group-hover:text-[#6f2c75] transition-colors">
+            <span className="font-space font-bold text-xl 2xl:text-2xl xl:whitespace-nowrap tracking-tight text-[#0f172a] group-hover:text-[#6f2c75] transition-colors">
               Metropolitan Transit
             </span>
           </button>

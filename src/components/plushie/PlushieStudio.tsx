@@ -29,6 +29,7 @@ import {
   priceDesign,
 } from '../../../api/plushie-catalog.js';
 import { PlushiePreview } from './PlushiePreview';
+import { PlushiePhotoPreview } from './PlushiePhotoPreview';
 import type { PlushieDesign, PlushieQuote, SavedPlushie } from './types';
 
 const DRAFT_KEY = 'plushie_studio_draft';
@@ -217,9 +218,13 @@ export const PlushieStudio: React.FC = () => {
         {/* Preview & summary */}
         <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-4 order-1">
           <div className={sectionClass}>
-            <div className="aspect-square bg-gradient-to-b from-[#faf5ff] to-[#fff7ed] rounded flex items-center justify-center p-4">
-              <PlushiePreview design={design} artworkUrl={artwork} />
-            </div>
+            {design.base === 'giant' ? (
+              <PlushiePhotoPreview design={design} artworkUrl={artwork} />
+            ) : (
+              <div className="aspect-square bg-gradient-to-b from-[#faf5ff] to-[#fff7ed] rounded flex items-center justify-center p-4">
+                <PlushiePreview design={design} artworkUrl={artwork} />
+              </div>
+            )}
             <div className="mt-3 text-center">
               <div className="font-space font-bold text-lg text-[#0f172a]">{design.name || 'Unnamed plushie'}</div>
               <div className="text-xs text-[#64748b]">
@@ -301,9 +306,12 @@ export const PlushieStudio: React.FC = () => {
             />
 
             <span className={labelClass}>Base</span>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
               {PLUSHIE_BASES.map((b) => (
-                <button key={b.id} onClick={() => update('base', b.id as PlushieDesign['base'])} className={optionClass(design.base === b.id)}>
+                <button key={b.id} onClick={() => {
+                    update('base', b.id as PlushieDesign['base']);
+                    if (b.id === 'giant') update('eyes', 'sleepy');
+                  }} className={optionClass(design.base === b.id)}>
                   <div className="font-space font-bold text-xs">{b.label}</div>
                   <div className={`text-[11px] mt-0.5 ${design.base === b.id ? 'text-purple-200' : 'text-[#94a3b8]'}`}>
                     from ${b.price}
@@ -330,11 +338,19 @@ export const PlushieStudio: React.FC = () => {
                 <span className={labelClass}>Eyes</span>
                 <div className="grid grid-cols-3 gap-2">
                   {PLUSHIE_EYES.map((e) => (
-                    <button key={e.id} onClick={() => update('eyes', e.id as PlushieDesign['eyes'])} className={optionClass(design.eyes === e.id)}>
+                    <button
+                      key={e.id}
+                      onClick={() => update('eyes', e.id as PlushieDesign['eyes'])}
+                      disabled={design.base === 'giant'}
+                      className={`${optionClass(design.eyes === e.id)} disabled:opacity-50 disabled:cursor-not-allowed`}
+                    >
                       <div className="font-space font-bold text-xs">{e.label}</div>
                     </button>
                   ))}
                 </div>
+                {design.base === 'giant' && (
+                  <p className="text-[11px] text-[#94a3b8] mt-1.5">The Sleepy Giant always has sleepy eyes.</p>
+                )}
               </div>
             </div>
           </section>

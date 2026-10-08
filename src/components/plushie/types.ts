@@ -1,6 +1,6 @@
 export interface PlushieDesign {
   name: string;
-  base: 'bear' | 'bunny' | 'cat' | 'bus' | 'blob';
+  base: 'giant' | 'bear' | 'bunny' | 'cat' | 'bus' | 'blob';
   size: 'mini' | 'regular' | 'jumbo';
   eyes: 'button' | 'sleepy' | 'sparkle';
   bodyColor: string;

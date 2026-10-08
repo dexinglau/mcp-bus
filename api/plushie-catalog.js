@@ -5,6 +5,7 @@
  */
 
 export const PLUSHIE_BASES = [
+  { id: 'giant', label: 'Sleepy Giant', price: 39 },
   { id: 'bear', label: 'Classic Bear', price: 28 },
   { id: 'bunny', label: 'Floppy Bunny', price: 30 },
   { id: 'cat', label: 'Commuter Cat', price: 29 },
@@ -25,7 +26,7 @@ export const PLUSHIE_EYES = [
 ];
 
 export const PLUSHIE_PALETTE = [
-  '#f5e6d3', '#d9a066', '#8b5a2b', '#f7c6d9', '#c3b1e1',
+  '#b22a2e', '#f5e6d3', '#d9a066', '#8b5a2b', '#f7c6d9', '#c3b1e1',
   '#a8d8ea', '#b5e48c', '#ffd166', '#ef476f', '#6f2c75',
   '#eb651b', '#2b2d42', '#ffffff',
 ];
@@ -65,10 +66,10 @@ const findById = (list, id) => list.find((item) => item.id === id);
 export function defaultDesign() {
   return {
     name: '',
-    base: 'bear',
+    base: 'giant',
     size: 'regular',
-    eyes: 'button',
-    bodyColor: '#d9a066',
+    eyes: 'sleepy',
+    bodyColor: '#b22a2e',
     accentColor: '#f5e6d3',
     cardPocket: 'back-slot',
     bagCount: 1,
@@ -118,7 +119,8 @@ export function validateDesign(input) {
       name,
       base: input.base,
       size: input.size,
-      eyes: input.eyes,
+      // The Sleepy Giant is a photo-based design that only comes with sleepy eyes.
+      eyes: input.base === 'giant' ? 'sleepy' : input.eyes,
       bodyColor: input.bodyColor.toLowerCase(),
       accentColor: input.accentColor.toLowerCase(),
       cardPocket: input.cardPocket,
